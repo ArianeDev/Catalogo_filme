@@ -1,0 +1,15 @@
+.container{
+    justify-items: center;
+    overflow: hidden;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: rgb(48, 1, 37);
+    transition: transform 0.3s ease;
+}
+img{
+    height: 20rem;
+}
+p{
+    text-align: justify;
+}
