@@ -1,12 +1,13 @@
 .conteiner{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
     background-color: #000000;
     padding: 1rem;
 }
 .conteiner ul{
-    gap: 2.5rem;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    gap: 2.5rem;
     list-style-type: none;
     color: rgb(255, 255, 255);
     font-family: Arial, Helvetica, sans-serif;
@@ -15,4 +16,11 @@
     display: flex;
     align-items: center;
     gap: 0.3rem;
+}
+
+h1{
+    font-family: "Winky Sans", sans-serif;
+    letter-spacing: 0.2rem;
+    font-size: 60px;
+    color: rgb(236, 96, 126);
 }

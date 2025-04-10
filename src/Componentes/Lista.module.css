@@ -1,14 +1,9 @@
 .containerFundo{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: #141414;
-    width: 90%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     gap: 5px;
 }
+
 figure{
-    display: grid;
-    grid-template-columns: 30% 30% 30%;
-    justify-content: center;   
+    display: flex;
 }

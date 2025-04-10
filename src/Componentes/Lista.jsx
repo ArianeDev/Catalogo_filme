@@ -39,7 +39,7 @@ export function Lista(){
     return(
         <div className={estilos.containerFundo}>
             <figure>
-                {movies.slice(0, 9).map(movie => (
+                {movies.slice(0, 6).map(movie => (
                     <Card key = {movie.id} 
                     movie = {movie} 
                     onOpenModal = {handleOpenModal} />
