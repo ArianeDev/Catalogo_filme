@@ -6,10 +6,49 @@ import estilos from './Lista.module.css';
 import { Modal } from "./Modal";
 import { Card } from "./Card";
 
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
 const API_key = 'af26cce282aecf5c6cc39a264f29d0a7';
 const API_url = 'https://api.themoviedb.org/3';
 
 export function Lista(){
+
+    let settings = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        initialSlide: 0,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2,
+              initialSlide: 2
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ]
+      };
 
     // crio uma variavel chamada movie, e "seto" o estado dela como vazio
     const [movies, setMovie] = useState([]); // lista
@@ -36,16 +75,28 @@ export function Lista(){
         setselectdMovie(null);
     };
 
+    const renderSliders = () => {
+        const qnt_filmes = 7;
+        const sliders = [];
+        for (let i = 0; i < movies.length; i += qnt_filmes) {
+            sliders.push(
+                <Slider key={i} {...settings}>
+                    {movies.slice(i, i + qnt_filmes).map(movie => (
+                        <Card key={movie.id} 
+                              movie={movie} 
+                              onOpenModal={handleOpenModal} />
+                    ))}
+                </Slider>
+            );
+        }
+        return sliders;
+    };
+
     return(
         <div className={estilos.containerFundo}>
-            <figure>
-                {movies.slice(0, 6).map(movie => (
-                    <Card key = {movie.id} 
-                    movie = {movie} 
-                    onOpenModal = {handleOpenModal} />
-                ))}
-            </figure>
+            {renderSliders()}
             {selectdMovie && (<Modal movie={selectdMovie} onClose={handleCloseModal} />)}
         </div>
+
     )
 }

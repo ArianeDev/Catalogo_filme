@@ -1,9 +1,4 @@
 .containerFundo{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: #141414;
-    gap: 5px;
-}
-
-figure{
-    display: flex;
+    width: 95%;
 }
