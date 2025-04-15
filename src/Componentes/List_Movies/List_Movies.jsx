@@ -1,19 +1,35 @@
-// axios permite a comunicação com as páginas http
 import axios from "axios";
 // as ferramentas comeladas com use são hooks de manuseio da biblioteca React
 import React, {useState, useEffect} from "react";
 import estilos from './Lista.module.css';
-import { Modal } from "./Modal";
-import { Card } from "./Card";
+import { Modal } from "../Modal/Modal";
+import { Card } from "../Card/Card";
 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
-const API_key = 'af26cce282aecf5c6cc39a264f29d0a7';
-const API_url = 'https://api.themoviedb.org/3';
+export function List_Movies({url}){
 
-export function Lista(){
+    // mostra se foi selecionado um filme para a visualização
+    const [selectdMovie, setselectdMovie] = useState(null); // variável
+    // crio uma variavel chamada movie, e "seto" o estado dela como vazio
+    const [movies, setMovie] = useState([]); // lista
+
+    const API_key = 'af26cce282aecf5c6cc39a264f29d0a7';
+    const API_url = 'https://api.themoviedb.org/3';
+
+    // Efect trabalha com uma estrutura especifica parametros(), script{} e dependencias[]
+    useEffect(() => {
+        axios.get(`${API_url}/${url}/popular?api_key=${API_key}&language=pt-BR`)
+            .then(response =>{
+                console.log(response.data.results);
+                setMovie(response.data.results)
+            })
+            .catch(error => {
+                console.log('Error', error);
+            })
+    }, []);
 
     let settings = {
         dots: true,
@@ -50,23 +66,6 @@ export function Lista(){
         ]
       };
 
-    // crio uma variavel chamada movie, e "seto" o estado dela como vazio
-    const [movies, setMovie] = useState([]); // lista
-    // mostra se foi selecionado um filme para a visualização
-    const [selectdMovie, setselectdMovie] = useState(null); // variável
-
-    // Efect trabalha com uma estrutura especifica parametros(), script{} e dependencias[]
-    useEffect(() => {
-        axios.get(`${API_url}/movie/popular?api_key=${API_key}&language=pt-BR`)
-            .then(response =>{
-                console.log(response.data.results);
-                setMovie(response.data.results)
-            })
-            .catch(error => {
-                console.log('Error', error);
-            })
-    }, []);
-
     const handleOpenModal = (movie) => {
         setselectdMovie(movie);
     };
@@ -75,16 +74,17 @@ export function Lista(){
         setselectdMovie(null);
     };
 
-    const renderSliders = () => {
-        const qnt_filmes = 7;
+    const renderSlidersMovies = () => {
+        const qnt_movie = 7;
         const sliders = [];
-        for (let i = 0; i < movies.length; i += qnt_filmes) {
+        for (let i = 0; i < movies.length; i += qnt_movie) {
             sliders.push(
                 <Slider key={i} {...settings}>
-                    {movies.slice(i, i + qnt_filmes).map(movie => (
+                    {movies.slice(i, i + qnt_movie).map(movie => (
                         <Card key={movie.id} 
                               movie={movie} 
-                              onOpenModal={handleOpenModal} />
+                              onOpenModal={handleOpenModal} 
+                              link={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}/>
                     ))}
                 </Slider>
             );
@@ -94,7 +94,7 @@ export function Lista(){
 
     return(
         <div className={estilos.containerFundo}>
-            {renderSliders()}
+            {renderSlidersMovies()}
             {selectdMovie && (<Modal movie={selectdMovie} onClose={handleCloseModal} />)}
         </div>
 

@@ -7,14 +7,11 @@ export function Modal({movie, onClose}){
         return null;
     }
 
-    console.log("Modal resenderizada")
-    console.log(movie)
-
     return(
         <div className={estilos.modalBack}>
             <div className={estilos.modalContainer}>
                 <div className={estilos.modalHeader}>
-                    <h2>{movie.title}</h2>
+                    <h2>{movie.title || movie.name}</h2>
                     <button onClick={onClose}>x</button>
                 </div>
                 <div className={estilos.imgDetails}>

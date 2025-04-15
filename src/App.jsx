@@ -1,8 +1,12 @@
-import { Main } from "./Pages";
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import { Rotas } from "./Rotas/Rotas";
 
 function App(){
     return(
-        <Main />
+        <BrowserRouter>
+            <Rotas/>
+        </BrowserRouter>
     )
 }
 

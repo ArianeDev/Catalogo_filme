@@ -2,6 +2,8 @@
     background-color: #181818;
     padding: 30px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     color: rgb(255, 255, 255);
 }
