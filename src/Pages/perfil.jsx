@@ -1,3 +1,5 @@
+import estilos from './style.module.css';
+
 export function Perfil(){
     return(
         <div>

@@ -7,19 +7,19 @@ export function BarraNavegacao(){
             <h1>Ariflix</h1>
             <nav>
                 <ul>
-                    <Link to="/">
+                    <Link to="/"  className={estilos.link}>
                         <li>
                             <span class="material-symbols-outlined">home</span>
                             Home
                         </li>
                     </Link>
-                    <Link to="serie">
+                    <Link to="serie" className={estilos.link}>
                         <li>
-                            <span class="material-symbols-outlined">serie</span>
+                            <span class="material-symbols-outlined">movie</span>
                             Series
                         </li>
                     </Link>
-                    <Link to="perfil">
+                    <Link to="perfil"  className={estilos.link}>
                         <li>
                             <span class="material-symbols-outlined">person</span>
                             Perfil
